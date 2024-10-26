@@ -3,24 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danger Persons</title>
-    <link rel="stylesheet" href="../css/suspicious_page_index.css">
+    <title>Known Persons</title>
+    <link rel="stylesheet" href="../css/known_page_index.css">
     <style>
         img {
             width: 150px;
             height: auto;
             margin: 10px;
         }
+
+        .gallery-item{
+            display: flex;
+            align-items: center;
+            mergin-bottom: 20px;
+        }
+
+        .gallery-text{
+            mergin-left: 20px;
+        }
     </style>
 </head>
+
 <body>
+    <!-- ヘッダー -->
     <header class="header">
         <div class="container">
             <a href="top_page.php"> <!-- トップページへのリンク -->
                 <img src="../../logo3.png" alt="Logo" class="logo"> <!-- 一つ上の階層から画像を読み込む -->
             </a>
           <ul class="nav">
-            <li class="header-hover-color"><a href="suspicious_page.php">不審者</a></li>
+          <li class="header-hover-color"><a href="suspicious_page.php">不審者</a></li>
             <li class="header-hover-color"><a href="known_page.php">知人</a></li>
             <li class="header-hover-color"><a href="calender_page.php">カレンダー</a></li>
             <li class="header-hover-color"><a href="interphone_page.php">インターホン</a></li>
@@ -70,9 +82,9 @@
             }
         }
 
-        //画像が保存されていなかったら「危険人物情報が保存されていません」と表示
+        //画像が保存されていなかったら「危険人物が保存されていません」と表示
         if(!$has_image){
-            echo '<div class="gallery-text">危険人物情報が保存されていません。</div>';
+            echo '<div class="gallery-text">危険人物が保存されていません。</div>';
         }
         ?>
         
