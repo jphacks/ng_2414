@@ -53,7 +53,8 @@
         }
         .state_wrap .button:hover {
             background-color: #606060; /* ホバー時の色 */
-        }
+        }    
+
     </style>
     <link rel="stylesheet" href="../css/interphone_page_index.css">
 </head>
@@ -93,6 +94,7 @@
         <button id="danger">dangerとして登録</button>
     </div>
 
+    
     <script>
         const video = document.getElementById('video');
         const message = document.getElementById('message');
@@ -171,4 +173,3 @@
     </script>
 </body>
 </html>
-
