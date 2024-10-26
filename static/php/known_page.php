@@ -28,24 +28,36 @@
           </ul>
         </div>
     </header>
-    <h1>既知人物リスト</h1>
+    <h1>知人リスト</h1>
     <div id="gallery">
         <?php
+        
+        //画像が保存されているかのフラグ
+        $has_image = false;
+
         $image_folder = "../images/known/";
+
+        //フォルダ内のファイルを取得
         if (is_dir($image_folder)) {
             if ($handle = opendir($image_folder)) {
                 while (false !== ($file = readdir($handle))) {
                     if ($file != '.' && $file != '..' && preg_match('/\.(jpg|jpeg|png|gif)$/i', $file)) {
+                        $has_image = true;
+                        
                         // ファイル名から拡張子を除去
                         $fileNameWithoutExt = pathinfo($file, PATHINFO_FILENAME);
                         echo '<div class="image-container">';
-                        echo '<img src="' . $image_folder . $file . '" alt="' . $file . '" onclick="editFileName(\'' . $file . '\', this.nextElementSibling)">';
                         echo '<p class="name_style">' . $fileNameWithoutExt . '</p>';
                         echo '</div>';
                     }
                 }
                 closedir($handle);
             }
+        }
+
+        //画像が保存されていなかったら「知人情報が保存されていません」と表示
+        if(!$has_image){
+            echo '<div class="gallery-text">知人情報が保存されていません。</div>';
         }
         ?>
     </div>
