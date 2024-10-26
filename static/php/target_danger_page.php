@@ -32,8 +32,12 @@
 
     <div id="gallery">
         <?php
-        // 画像が保存されているフォルダのパス
-        $image_folder = "../images/danger/";
+        // 危険人物画像が保存されているフォルダのパス
+        $image_folder = "../images/target_danger/";
+        
+
+        //画像が保存されているかのフラグ
+        $has_image = false;
 
         // フォルダ内のファイルを取得
         if (is_dir($image_folder)) {
@@ -41,13 +45,37 @@
                 while (false !== ($file = readdir($handle))) {
                     // 画像ファイルの拡張子をチェック
                     if ($file != '.' && $file != '..' && preg_match('/\.(jpg|jpeg|png|gif)$/i', $file)) {
+                        $has_image = true;
+
+                        //画像ファイル名から拡張子を除いたファイル名を取得
+                        $base_name = pathinfo($file, PATHINFO_FILENAME);
+                        //対応するテキストファイルのパス
+                        $text_file_path = $image_folder . $base_name . '.txt';
+
+                        //テキストファイルの内容を取得
+                        $text_content = '';
+                        if(file_exists($text_file_path)){
+                            $text_content = file_get_contents($text_file_path);
+                        }else {
+                            $text_content = '説明文が見つかりません。'; //ファイルが見つからない場合
+                        }
+
+                        echo '<div class="gallery-item">';
                         echo '<img src="' . $image_folder . $file . '" alt="' . $file . '">';
+                        echo '<div class="gallery-text">'.htmlspecialchars($text_content) . '</div>';
+                        echo '</div>';
                     }
                 }
                 closedir($handle);
             }
         }
+
+        //画像が保存されていなかったら「危険人物が保存されていません」と表示
+        if(!$has_image){
+            echo '<div class="gallery-text">危険人物が保存されていません。</div>';
+        }
         ?>
+        
     </div>
 </body>
 </html>
