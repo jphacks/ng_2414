@@ -1,3 +1,5 @@
+<!-- 不在用ページ -->
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -41,7 +43,7 @@
         /* 不在ボタンの設定 */
         .state_wrap{
             margin-top: 20px;
-            text-align: right; /* ボタンを右側に配置 */        
+            text-align: right; /* ボタンを右側に配置 */
         }
         .state_wrap .button{
             color:  #f09c8a; /* 文字色 */
@@ -53,8 +55,8 @@
         }
         .state_wrap .button:hover {
             background-color: #606060; /* ホバー時の色 */
-        }
-    </style>
+        }    
+        </style>
     <link rel="stylesheet" href="../css/interphone_page_index.css">
 </head>
 
@@ -70,7 +72,6 @@
             <li class="header-hover-color"><a href="calender_page.php">カレンダー</a></li>
             <li class="header-hover-color"><a href="interphone_page.php">インターホン</a></li>
             <li class="header-hover-color"><a href="target_danger_page.php">危険人物リスト</a></li>
-
           </ul>
         </div>
     </header>
@@ -83,8 +84,9 @@
         <div class="interphone_button_wrap">
         </div>
 
+        <!-- 不在か在宅か切り替え -->
         <div class="state_wrap">
-            <a href="nonstate_interphone_page.php" class="button">在宅</a>
+            <a href="interphone_page.php" class="button">不在</a>
         </div>
     </div>
     <div id="message" class="hidden"></div>
