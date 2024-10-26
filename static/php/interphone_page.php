@@ -71,7 +71,6 @@
         <button id="danger">dangerとして登録</button>
     </div>
 
-    
     <script>
         const video = document.getElementById('video');
         const message = document.getElementById('message');
@@ -145,7 +144,9 @@
             alert(data.message);
             actionButtons.classList.add('hidden'); // アクションボタンを非表示
             message.textContent = ''; // メッセージをクリア
-        }
+        }        
+
     </script>
 </body>
 </html>
+
