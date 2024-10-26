@@ -93,7 +93,6 @@
         <button id="danger">dangerとして登録</button>
     </div>
 
-    
     <script>
         const video = document.getElementById('video');
         const message = document.getElementById('message');
@@ -172,3 +171,4 @@
     </script>
 </body>
 </html>
+
