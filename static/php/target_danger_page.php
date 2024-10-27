@@ -76,7 +76,7 @@
 
         if ($folder_updated) {
             // Pythonスクリプト
-            $command = "python C:\MAMP\htdocs\JPHACKS24-2\danger.py";
+            $command = "python C:\MAMP\htdocs\JPHACKS24-2\danger.py"; //自分のパソコンの絶対パスに変更
             
             // 実行とエラーチェック
             exec($command, $output, $return_var);
