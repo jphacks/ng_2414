@@ -52,7 +52,7 @@
 - 不在時に人が訪ねてきた場合、留守にしていることを伝える音声を流すようにしたこと
 
 - 人が訪ねてきた際にその場で知人か危険人物かを選択できるようになっていること。
-- 
+
 
 
 ## 開発技術
@@ -65,11 +65,13 @@
 - MAMP
 - Google Cloud Vision
 - ![Python](https://img.shields.io/badge/Python-v3.8.0-blue?style=for-the-badge)
-  ![Flask](https://img.shields.io/badge/Flask-v3.0.3-lightgrey?style=for-the-badge)
-  ![Flask-CORS](https://img.shields.io/badge/Flask-CORS-v5.0.0-lightgrey?style=for-the-badge)
-  ![face_recognition](https://img.shields.io/badge/face__recognition-v1.3.0-blue?style=for-the-badge)
+- ![Flask](https://img.shields.io/badge/Flask-v3.0.3-lightgrey?style=for-the-badge)
+- ![Flask-CORS](https://img.shields.io/badge/Flask-CORS-v5.0.0-lightgrey?style=for-the-badge)
+- ![face_recognition](https://img.shields.io/badge/face__recognition-v1.3.0-blue?style=for-the-badge)
 
 - HTML / CSS / JavaScript：フロントエンドの構築
+
+- 音声 byボイスゲート（https://vidweb.co.jp/voicegate/）
 
 #### デバイス
 
