@@ -35,15 +35,20 @@
         </div>
     </header>
     <h1 class="calendar-title">カレンダー</h1>
-    <div class="calendar-container">
-        <div id="calendar"></div>
-        <div id="selected-date" class="selected-date">選択された日付: なし</div> <!-- ここに選択された日付が表示される -->
+    <div class="calendar-wrap">
+        <div class="calendar-container">
+            <div id="calendar"></div>
+            <!-- <div id="selected-date" class="selected-date">選択された日付: なし</div> ここに選択された日付が表示される -->
+        </div>
+        <div>
+            <h2 class="picture-title">選択された日付に来た人たちの写真</h2>
+            <div id="selected-date" class="selected-date">選択された日付: なし</div> <!-- ここに選択された日付が表示される -->
+            <div id="photo-list">
+                <!-- 写真一覧がここに表示されます -->
+            </div>
+        </div>
     </div>
-
-    <h2 class="picture-title">選択された日付に来た人たちの写真</h2>
-    <div id="photo-list">
-        <!-- 写真一覧がここに表示されます -->
-    </div>
+        
 
     <!-- FullCalendar JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
@@ -70,7 +75,7 @@
                 var month = date.split('-')[1];
                 var day = date.split('-')[2];
 
-                var fileName = `danger_${year}${month}${day}_154758.jpg`; // 必要に応じて変更。
+                var fileName = `danger_${year}${month}${day}_154760.jpg`; // 必要に応じて変更。
 
                 var imageUrl = `../images/danger/${fileName}`;
 
