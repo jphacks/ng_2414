@@ -71,7 +71,7 @@
 
 - HTML / CSS / JavaScript：フロントエンドの構築
 
-- 音声 byボイスゲート（https://vidweb.co.jp/voicegate/）
+- 音声 byボイスゲート（https://vidweb.co.jp/voicegate/ ）
 
 #### デバイス
 
