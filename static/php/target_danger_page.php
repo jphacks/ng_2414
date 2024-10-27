@@ -78,10 +78,9 @@
                 }
             }
 
-<<<<<<< HEAD
         if ($folder_updated) {
             // Pythonスクリプト
-            $command = "python C:\MAMP\htdocs\JPHACKS24-2\danger.py"; //自分のパソコンの絶対パスに変更
+            $command = "python C:\MAMP\htdocs\ng_2414\danger.py"; //自分のパソコンの絶対パスに変更
             
             // 実行とエラーチェック
             exec($command, $output, $return_var);
@@ -90,11 +89,6 @@
             } else {
                 // 成功時にタイムスタンプを更新
                 file_put_contents($timestamp_file, $latest_timestamp);
-=======
-            if ($folder_updated) {
-                // Pythonスクリプト
-                $command = "python C:\MAMP\htdocs\JPHACKS24-2\danger.py";
->>>>>>> 0a3bf0b286759f78da0cb8e94f17d5e3a88f03cd
                 
                 // 実行とエラーチェック
                 exec($command, $output, $return_var);
@@ -110,7 +104,7 @@
                     }
                 }
             }
-
+        }
 
             // 危険人物画像が保存されているかのフラグ
             $has_image = false;

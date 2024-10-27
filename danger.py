@@ -14,7 +14,7 @@ params = urllib.parse.urlencode({
 })
 
 conn = http.client.HTTPSConnection('jphacks24-chocopa.cognitiveservices.azure.com')
-image_folder = 'C:\MAMP\htdocs\JPHACKS24-2\static\images\danger_target'  #自分のパソコンの絶対パスに変更
+image_folder = 'C:\MAMP\htdocs\ng_2414\static\images\danger_target'  #自分のパソコンの絶対パスに変更
 output_data = []
 
 for file_name in os.listdir(image_folder):
