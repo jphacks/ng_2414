@@ -1,6 +1,6 @@
 # 留守るちゃん <img src="logo.png" alt="代替テキスト" width="25px" />
 
-[![IMAGE ALT TEXT HERE](https://jphacks.com/wp-content/uploads/2024/07/JPHACKS2024_ogp.jpg)](https://www.youtube.com/watch?v=DZXUkEj-CSI)
+[![IMAGE ALT TEXT HERE](logo_readme.jpg)](https://youtu.be/Tx3kPnwnZuo?si=2tIYosLwgckPpamW)
 
 
 ## 製品概要
@@ -11,23 +11,30 @@
 子どもが一人で留守番している時、インターフォンに子どもが勝手に応えてしまうと防犯面で心配…そんな不安を解消するシステムを作りたい！という思いから、大人の不在時にはインターフォンが自動で対応してくれる防犯システムを作りました。
 
 ### 製品説明（具体的な製品の説明）
-
+- スタートページ
+    - STARTをクリックするとインターフォンが表示されます
+    <img src=start_readme.jpg>
 - 不審者
     - 訪ねてきた人で知り合いでないと判断した人の写真の一覧を見ることができます。
+    <img src=start_readme.jpg>
 - 知人
     - 知り合いであると登録した人の写真の一覧を見ることができます。
     - 写真をクリックするとファイル名の後ろに氏名を入力することができるようになっています。
+    <img src=know_readme.jpg>
+
 - カレンダー
     - 今日の日付を確認することができます。
-
+    <img src=calender_readme.jpg>
 - インターフォン
     - インターフォンのカメラの映像を利用して、尋ねてきた人の顔認証を行います。
     - 知人か不審者か判別し、判別内容によってインターフォンの操作内容を変えます。
   - 在宅か不在か状態を選択できるようにし、インターフォンの自動対応の仕方を変えています。
-
+  <img src=inter_readme.jpg>
+    <img src=inter2_readme.jpg>
 - 危険人物
     - 危険人物に登録した人の写真の一覧を見ることができます。
     - 不審者から危険人物に設定した人の外見の特徴を自動的にまとめます。
+    <img src=danger_readme.jpg>
 
 ### 特長
 
@@ -37,6 +44,9 @@
 訪ねてきた未知の人物を、手動で知人または不審者として登録します。
 #### 3. **履歴表示**
 日付に基づいて、過去の訪問者の画像一覧を表示します。
+
+### 実行時の注意
+danger.pyではimage_folderのパス、target_danger_page.phpではpythonスクリプトのパスを自身の絶対パスに変更してください。
 ### 解決出来ること
 
 「留守るちゃん」は子どもの留守番時に子供だけでインターフォンの対応をすることを避け、子どもの安全を守ります。また、訪ねてきた人の危険人物情報を特徴だけでなく写真とともに分かりやすく一覧としてみることができます。
@@ -66,7 +76,7 @@
 - Google Cloud Vision
 - ![Python](https://img.shields.io/badge/Python-v3.8.0-blue?style=for-the-badge)
 - ![Flask](https://img.shields.io/badge/Flask-v3.0.3-lightgrey?style=for-the-badge)
-- ![Flask-CORS](https://img.shields.io/badge/Flask-CORS-v5.0.0-lightgrey?style=for-the-badge)
+- Flask-CORS
 - ![face_recognition](https://img.shields.io/badge/face__recognition-v1.3.0-blue?style=for-the-badge)
 
 - HTML / CSS / JavaScript：フロントエンドの構築
