@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -22,8 +21,8 @@
             border-radius: 10px;
         }
         /* メッセージのクラスによる文字色の設定 */
-        .target_danger {
-            color: red;
+        .danger {
+            color: rgb(255, 0, 0);
         }
         .known {
             color: green;
@@ -31,41 +30,13 @@
         .unknown {
             color: black;
         }
-        .danger {
-            color: black;
-        }
         #action-buttons {
             margin-top: 10px; /* メッセージとのスペースを追加 */
             text-align: center; /* ボタンを中央に配置 */
         }
-        #audio-choice {
-            position: absolute;
-            bottom: 10%;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-        }
         .hidden {
             display: none;
         }
-
-        /* 不在ボタンの設定 */
-        .state_wrap{
-            margin-top: 20px;
-            text-align: right; /* ボタンを右側に配置 */        
-        }
-        .state_wrap .button{
-            color:  #f09c8a; /* 文字色 */
-            font-size: 30px; /* フォントサイズ */
-            padding: 0px 20px; /* パディングを増やしてボタンを大きくする */
-            border: none;
-            border-radius: 8px; /* ボタンの角を丸める */
-            text-decoration: none; /* リンクの下線を削除 */
-        }
-        .state_wrap .button:hover {
-            background-color: #606060; /* ホバー時の色 */
-        }    
-
     </style>
     <link rel="stylesheet" href="../css/interphone_page_index.css">
 </head>
@@ -73,15 +44,15 @@
 <body class="interphone_style">
     <header class="header">
         <div class="container">
-            <a href="top_page.php"> <!-- トップページへのリンク -->
+            <a href="top_page_index.html"> <!-- トップページへのリンク -->
                 <img src="../../logo3.png" alt="Logo" class="logo"> <!-- 一つ上の階層から画像を読み込む -->
             </a>
           <ul class="nav">
-          <li class="header-hover-color"><a href="suspicious_page.php">不審者</a></li>
-            <li class="header-hover-color"><a href="known_page.php">知人</a></li>
-            <li class="header-hover-color"><a href="calender_page.php">カレンダー</a></li>
-            <li class="header-hover-color active"><a href="interphone_page.php">インターホン</a></li>
-            <li class="header-hover-color"><a href="target_danger_page.php">危険人物リスト</a></li>          </ul>
+            <li class="header-hover-color"><a href="suspicious_page_index.html">危険人物</a></li>
+            <li class="header-hover-color"><a href="known_page_index.html">知人</a></li>
+            <li class="header-hover-color"><a href="calender_page_index.html">カレンダー</a></li>
+            <li class="header-hover-color active"><a href="interphone_page_index.html">インターホン</a></li>
+          </ul>
         </div>
     </header>
     <h1 class="title">INTERPHONE</h1>
@@ -89,12 +60,8 @@
         <div class="interphone_camera">
             <video class="img_camera" id="video" autoplay></video><br>
         </div>
-        
         <div class="interphone_button_wrap">
-        </div>
-
-        <div class="state_wrap">
-            <a href="nonstate_interphone_page.php" class="button">在宅</a>
+            
         </div>
     </div>
     <div id="message" class="hidden"></div>
@@ -102,13 +69,6 @@
         <button id="known">knownとして登録</button>
         <button id="danger">dangerとして登録</button>
     </div>
-    <div id="audio-choice" class="hidden">
-        <button id="play-audio">音声を再生</button>
-    </div>
-
-    <audio id="interphoneSound" src="../audio/interphone_sound.mp3"></audio>
-    <audio id="absentAudio" src="../audio/rusu.mp3"></audio>
-    <audio id="pleaseWaitAudio" src="../audio/please_wait.mp3"></audio> <!--手が離せないときに流す音声-->
 
     
     <script>
@@ -117,24 +77,11 @@
         const actionButtons = document.getElementById('action-buttons');
         const knownButton = document.getElementById('known');
         const dangerButton = document.getElementById('danger');
-        const audioChoice = document.getElementById('audio-choice');
-        const playAudioButton = document.getElementById('play-audio');
-        const absentAudio = document.getElementById('absentAudio');
-        const interphoneSound = document.getElementById('interphoneSound');
 
         // カメラの映像を取得して表示
         navigator.mediaDevices.getUserMedia({ video: true })
             .then(stream => { video.srcObject = stream; })
             .catch(error => { console.error("カメラの取得に失敗しました:", error); });
-
-        // 音声再生の関数
-        function playAbsentAudio() {
-            absentAudio.play();
-        }
-
-        // 音声が再生中かどうかを示すフラグ
-        let isPlayingInterphoneSound = false;
-        let isPlayingPleaseWaitAudio = false;
 
             // フレームを定期的にAPIに送信して結果を取得
         setInterval(async () => {
@@ -157,77 +104,27 @@
             message.classList.remove('hidden');
 
             // クラスをリセット
-            message.classList.remove('target_danger', 'known', 'unknown', 'danger'); 
+            message.classList.remove('danger', 'known', 'unknown'); 
 
-            if (data.result === 'target_danger') {
+            if (data.result === 'danger') {
                 message.textContent = '危険です！';
-                message.classList.add('target_danger'); // 危険な場合は赤色
+                message.classList.add('danger'); // 危険な場合は赤色
                 actionButtons.classList.add('hidden'); // アクションボタンを非表示
-
-                // ピンポン音を鳴らす
-                if(!isPlayingInterphoneSound) {
-                    interphoneSound.play();
-                    isPlayingInterphoneSound = true;
-                }
-
-                audioChoice.classList.remove('hidden'); // 音声選択ボタンを表示
-                isPlayingPleaseWaitAudio = false; //音声が流れたかを記録するフラグ
             } else if (data.result === 'known') {
                 message.textContent = '既知の人物です';
                 message.classList.add('known'); // 既知の人物は緑色
                 actionButtons.classList.add('hidden'); // アクションボタンを非表示
-                audioChoice.classList.add('hidden'); // 音声選択ボタンを非表示
-
-                // ピンポン音を鳴らす
-                if(!isPlayingInterphoneSound) {
-                    interphoneSound.play();
-                    isPlayingInterphoneSound = true;
-                }
-
-                 // 10秒後に音声を再生
-                if(!isPlayingPleaseWaitAudio) {
-                    setTimeout(() => {
-                        const pleaseWaitAudio = document.getElementById('pleaseWaitAudio');
-                        pleaseWaitAudio.play();
-                    }, 10000); // 10秒 (10000ミリ秒) 後に再生
-                    isPlayingPleaseWaitAudio = true;
-                }
             } else if (data.result === 'unknown') {
                 message.innerHTML = '未知の人物が検出されました。<br>登録してください。';
                 message.classList.add('unknown'); // 未知の人物は黒色
                 actionButtons.classList.remove('hidden'); // アクションボタンを表示
 
-                // ピンポン音を鳴らす
-                if(!isPlayingInterphoneSound) {
-                    interphoneSound.play();
-                    isPlayingInterphoneSound = true;
-                }
-
-                audioChoice.classList.add('hidden'); // 音声選択ボタンを非表示
-                isPlayingPleaseWaitAudio = false; 
-
                 knownButton.onclick = () => registerPerson(blob, 'known');
                 dangerButton.onclick = () => registerPerson(blob, 'danger');
-            } else if (data.result === 'danger') {
-                message.textContent = '不審者です。';
-                message.classList.add('danger'); 
-                actionButtons.classList.add('hidden'); // アクションボタンを非表示
-
-                // ピンポン音を鳴らす
-                if(!isPlayingInterphoneSound) {
-                    interphoneSound.play();
-                    isPlayingInterphoneSound = true;
-                }
-
-                audioChoice.classList.remove('hidden'); // 音声選択ボタンを表示
-                isPlayingPleaseWaitAudio = false; //音声が流れたかを記録するフラグ
             } else {
                 message.textContent = '顔を映してください。'; // 顔が認識できない場合のメッセージ
                 message.classList.add('unknown'); // 未知の人物は黒色
                 actionButtons.classList.add('hidden'); // アクションボタンを非表示
-                audioChoice.classList.add('hidden'); // 音声選択ボタンを非表示
-                isPlayingPleaseWaitAudio = false;
-                isPlayingInterphoneSound = false;
             }
             
         }, 3000); // 3秒ごとにフレームを送信
@@ -248,13 +145,6 @@
             actionButtons.classList.add('hidden'); // アクションボタンを非表示
             message.textContent = ''; // メッセージをクリア
         }
-        
-        // 音声再生ボタンの動作
-        playAudioButton.addEventListener('click', () => {
-            playAbsentAudio();
-            audioChoice.classList.add('hidden'); // 音声選択ボタンを非表示
-        });
-
     </script>
 </body>
 </html>
