@@ -70,7 +70,7 @@
                 var month = date.split('-')[1];
                 var day = date.split('-')[2];
 
-                var fileName = `danger_${year}${month}${day}_154801.jpg`; // 必要に応じて変更。
+                var fileName = `danger_${year}${month}${day}_154758.jpg`; // 必要に応じて変更。
 
                 var imageUrl = `../images/danger/${fileName}`;
 
