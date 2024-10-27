@@ -63,7 +63,7 @@
 
 - Flask
 - MAMP
-
+- Google Cloud Vision
 - ![Python](https://img.shields.io/badge/Python-v3.8.0-blue?style=for-the-badge)
   ![Flask](https://img.shields.io/badge/Flask-v3.0.3-lightgrey?style=for-the-badge)
   ![Flask-CORS](https://img.shields.io/badge/Flask-CORS-v5.0.0-lightgrey?style=for-the-badge)
