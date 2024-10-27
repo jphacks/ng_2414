@@ -32,7 +32,7 @@
             color: black;
         }
         .danger {
-            color: black;
+            color: red;
         }
         #action-buttons {
             margin-top: 10px; /* メッセージとのスペースを追加 */
