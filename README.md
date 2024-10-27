@@ -1,4 +1,5 @@
 # 留守るちゃん <img src="logo.png" alt="代替テキスト" width="25px" />
+(画像をクリックしてください。デモが流れます。)
 
 [![IMAGE ALT TEXT HERE](logo_readme.jpg)](https://youtu.be/Tx3kPnwnZuo?si=2tIYosLwgckPpamW)
 
