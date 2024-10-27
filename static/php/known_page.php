@@ -32,7 +32,7 @@
     let suffix = match && match[2] ? match[2].substring(1) : ""; // "-"以降の追加部分、なければ空文字
 
     // 入力フィールドに、既存の追加部分を表示または空欄で入力
-    suffix = prompt("ファイル名の後ろに追加する名前を入力してください", suffix);
+    suffix = prompt("名前を入力してください", suffix);
     if (suffix !== null) {
         // 新しいファイル名を生成、ベース名に "-" を追加
         const newFileName = mainPart + (suffix ? '-' : '') + suffix + extension;
@@ -69,40 +69,35 @@
             <li class="header-hover-color active"><a href="known_page.php">知人</a></li>
             <li class="header-hover-color"><a href="calender_page.php">カレンダー</a></li>
             <li class="header-hover-color"><a href="interphone_page.php">インターホン</a></li>
-            <li class="header-hover-color"><a href="target_danger_page.php">危険人物リスト</a></li>
-          </ul>
+            <li class="header-hover-color"><a href="target_danger_page.php">危険人物リスト</a></li>          </ul>
         </div>
     </header>
-    <h1>知人リスト</h1>
-    <div id="gallery">
-        <?php
-        $image_folder = "../images/known/";
-        //画像が保存されているかのフラグ
-        $has_image = false;
 
-        if (is_dir($image_folder)) {
-            if ($handle = opendir($image_folder)) {
-                while (false !== ($file = readdir($handle))) {
-                    if ($file != '.' && $file != '..' && preg_match('/\.(jpg|jpeg|png|gif)$/i', $file)) {
-                        $has_image = true;
+    <div class="known-container">
+        <div class="known-title">
+            <h1>知人</h1>
+        </div>
 
-                        // ファイル名から拡張子を除去
-                        $fileNameWithoutExt = pathinfo($file, PATHINFO_FILENAME);
-                        echo '<div class="image-container">';
-                        echo '<img src="' . $image_folder . $file . '" alt="' . $file . '" onclick="editFileName(\'' . $file . '\', this.nextElementSibling)">';
-                        echo '<p class="name_style">' . $fileNameWithoutExt . '</p>';
-                        echo '</div>';
+        <div id="gallery">
+            <?php
+            $image_folder = "../images/known/";
+            if (is_dir($image_folder)) {
+                if ($handle = opendir($image_folder)) {
+                    while (false !== ($file = readdir($handle))) {
+                        if ($file != '.' && $file != '..' && preg_match('/\.(jpg|jpeg|png|gif)$/i', $file)) {
+                            // ファイル名から拡張子を除去
+                            $fileNameWithoutExt = pathinfo($file, PATHINFO_FILENAME);
+                            echo '<div class="image-container">';
+                            echo '<img src="' . $image_folder . $file . '" alt="' . $file . '" onclick="editFileName(\'' . $file . '\', this.nextElementSibling)">';
+                            echo '<p class="name_style">' . $fileNameWithoutExt . '</p>';
+                            echo '</div>';
+                        }
                     }
+                    closedir($handle);
                 }
-                closedir($handle);
             }
-        }
-
-        //画像が保存されていなかったら「知人が保存されていません」と表示
-        if(!$has_image){
-            echo '<div class="gallery-text">知人が保存されていません。</div>';
-        }
-        ?>
+            ?>
+        </div>
     </div>
 </body>
 </html>

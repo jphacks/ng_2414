@@ -1,7 +1,7 @@
 <?php
 // 元の画像フォルダとコピー先フォルダのパスを指定
 $image_folder = "../images/danger/";
-$destination_folder = "../images/target_danger/";
+$destination_folder = "../images/danger_target/";
 
 if (isset($_POST['fileName'])) {
     $fileName = basename($_POST['fileName']); // ファイル名をサニタイズ
@@ -10,13 +10,13 @@ if (isset($_POST['fileName'])) {
     $originalPath = $image_folder . $fileName;
     $destinationPath = $destination_folder . $fileName;
 
-    // ファイルが存在する場合のみコピー
+    // ファイルが存在する場合のみ移動
     if (file_exists($originalPath)) {
-        if (copy($originalPath, $destinationPath)) {
-            echo "コピーが成功しました。";
+        if (rename($originalPath, $destinationPath)) { // ファイルを移動
+            echo "ファイルが正常に移動されました。";
         } else {
             http_response_code(500);
-            echo "コピーに失敗しました。";
+            echo "ファイルの移動に失敗しました。";
         }
     } else {
         http_response_code(400);

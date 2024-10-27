@@ -23,13 +23,16 @@
             border-radius: 10px;
         }
         /* メッセージのクラスによる文字色の設定 */
-        .danger {
-            color: rgb(255, 0, 0);
+        .target_danger {
+            color: red;
         }
         .known {
             color: green;
         }
         .unknown {
+            color: black;
+        }
+        .danger {
             color: black;
         }
         #action-buttons {
@@ -48,7 +51,7 @@
         .state_wrap .button{
             color:  #f09c8a; /* 文字色 */
             font-size: 30px; /* フォントサイズ */
-            padding: 5px 20px; /* パディングを増やしてボタンを大きくする */
+            padding: 0px 20px; /* パディングを増やしてボタンを大きくする */
             border: none;
             border-radius: 8px; /* ボタンの角を丸める */
             text-decoration: none; /* リンクの下線を削除 */
@@ -67,11 +70,11 @@
                 <img src="../../logo3.png" alt="Logo" class="logo"> <!-- 一つ上の階層から画像を読み込む -->
             </a>
           <ul class="nav">
-            <li class="header-hover-color"><a href="suspicious_page.php">危険人物</a></li>
+          <li class="header-hover-color"><a href="suspicious_page.php">不審者</a></li>
             <li class="header-hover-color"><a href="known_page.php">知人</a></li>
-            <li class="header-hover-color"><a href="calender_page.php">カレンダー</a></li>
+            <li class="header-hover-color active"><a href="calender_page.php">カレンダー</a></li>
             <li class="header-hover-color"><a href="interphone_page.php">インターホン</a></li>
-          </ul>
+            <li class="header-hover-color"><a href="target_danger_page.php">危険人物リスト</a></li>          </ul>
         </div>
     </header>
     <h1 class="title">INTERPHONE</h1>
@@ -94,18 +97,34 @@
         <button id="danger">dangerとして登録</button>
     </div>
 
-    
+    <audio id="interphoneSound" src="../audio/interphone_sound.mp3"></audio>
+    <audio id="absentAudio" src="../audio/rusu.mp3"></audio>
+
+
     <script>
         const video = document.getElementById('video');
         const message = document.getElementById('message');
         const actionButtons = document.getElementById('action-buttons');
         const knownButton = document.getElementById('known');
         const dangerButton = document.getElementById('danger');
+        const audioChoice = document.getElementById('audio-choice');
+        const playAudioButton = document.getElementById('play-audio');
+        const absentAudio = document.getElementById('absentAudio');
+        const interphoneSound = document.getElementById('interphoneSound');
 
         // カメラの映像を取得して表示
         navigator.mediaDevices.getUserMedia({ video: true })
             .then(stream => { video.srcObject = stream; })
             .catch(error => { console.error("カメラの取得に失敗しました:", error); });
+
+        // 音声再生の関数
+        function playAbsentAudio() {
+            absentAudio.play();
+        }
+
+        // 音声が再生中かどうかを示すフラグ
+        let isPlayingInterphoneSound = false;
+        let isPlayingPleaseWaitAudio = false;
 
             // フレームを定期的にAPIに送信して結果を取得
         setInterval(async () => {
@@ -130,25 +149,87 @@
             // クラスをリセット
             message.classList.remove('danger', 'known', 'unknown'); 
 
-            if (data.result === 'danger') {
+            if (data.result === 'target_danger') {
                 message.textContent = '危険です！';
-                message.classList.add('danger'); // 危険な場合は赤色
+                message.classList.add('target_danger'); // 危険な場合は赤色
                 actionButtons.classList.add('hidden'); // アクションボタンを非表示
+
+                // ピンポン音を鳴らす
+                if(!isPlayingInterphoneSound) {
+                    interphoneSound.play();
+                    isPlayingInterphoneSound = true;
+                }
+
+                // 3秒後に音声を再生
+                if(!isPlayingPleaseWaitAudio) {
+                    setTimeout(() => {
+                        const pleaseWaitAudio = document.getElementById('absentAudio');
+                        pleaseWaitAudio.play();
+                    }, 3000); // 3秒 (3000ミリ秒) 後に再生
+                    isPlayingPleaseWaitAudio = true;
+                }
             } else if (data.result === 'known') {
                 message.textContent = '既知の人物です';
                 message.classList.add('known'); // 既知の人物は緑色
                 actionButtons.classList.add('hidden'); // アクションボタンを非表示
-            } else if (data.result === 'unknown') {
-                message.innerHTML = '未知の人物が検出されました。<br>登録してください。';
-                message.classList.add('unknown'); // 未知の人物は黒色
-                actionButtons.classList.remove('hidden'); // アクションボタンを表示
 
-                knownButton.onclick = () => registerPerson(blob, 'known');
-                dangerButton.onclick = () => registerPerson(blob, 'danger');
+                // ピンポン音を鳴らす
+                if(!isPlayingInterphoneSound) {
+                    interphoneSound.play();
+                    isPlayingInterphoneSound = true;
+                }
+
+                // 3秒後に音声を再生
+                if(!isPlayingPleaseWaitAudio) {
+                    setTimeout(() => {
+                        const pleaseWaitAudio = document.getElementById('absentAudio');
+                        pleaseWaitAudio.play();
+                    }, 3000); // 3秒 (3000ミリ秒) 後に再生
+                    isPlayingPleaseWaitAudio = true;
+                }
+            } else if (data.result === 'unknown') {
+                message.innerHTML = '未知の人物が検出されました。';
+                message.classList.add('unknown'); // 未知の人物は黒色
+                actionButtons.classList.add('hidden'); // アクションボタンを表示
+
+                // ピンポン音を鳴らす
+                if(!isPlayingInterphoneSound) {
+                    interphoneSound.play();
+                    isPlayingInterphoneSound = true;
+                }
+
+                // 3秒後に音声を再生
+                if(!isPlayingPleaseWaitAudio) {
+                    setTimeout(() => {
+                        const pleaseWaitAudio = document.getElementById('absentAudio');
+                        pleaseWaitAudio.play();
+                    }, 3000); // 3秒 (3000ミリ秒) 後に再生
+                    isPlayingPleaseWaitAudio = true;
+                }
+            }else if (data.result === 'danger') {
+                message.textContent = '不審者です。';
+                message.classList.add('danger'); 
+
+                // ピンポン音を鳴らす
+                if(!isPlayingInterphoneSound) {
+                    interphoneSound.play();
+                    isPlayingInterphoneSound = true;
+                }
+
+                // 3秒後に音声を再生
+                if(!isPlayingPleaseWaitAudio) {
+                    setTimeout(() => {
+                        const pleaseWaitAudio = document.getElementById('absentAudio');
+                        pleaseWaitAudio.play();
+                    }, 3000); // 3秒 (3000ミリ秒) 後に再生
+                    isPlayingPleaseWaitAudio = true;
+                }
             } else {
                 message.textContent = '顔を映してください。'; // 顔が認識できない場合のメッセージ
                 message.classList.add('unknown'); // 未知の人物は黒色
                 actionButtons.classList.add('hidden'); // アクションボタンを非表示
+                isPlayingPleaseWaitAudio = false;
+                isPlayingInterphoneSound = false;
             }
             
         }, 3000); // 3秒ごとにフレームを送信
