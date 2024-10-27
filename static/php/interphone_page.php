@@ -184,12 +184,12 @@
                     isPlayingInterphoneSound = true;
                 }
 
-                 // 10秒後に音声を再生
+                 // 5秒後に音声を再生
                 if(!isPlayingPleaseWaitAudio) {
                     setTimeout(() => {
                         const pleaseWaitAudio = document.getElementById('pleaseWaitAudio');
                         pleaseWaitAudio.play();
-                    }, 10000); // 10秒 (10000ミリ秒) 後に再生
+                    }, 5000); // 5秒 (5000ミリ秒) 後に再生
                     isPlayingPleaseWaitAudio = true;
                 }
             } else if (data.result === 'unknown') {
